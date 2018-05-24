@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Paper from "@material-ui/core/Paper";
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
 import {submit} from '../redux/loginReducers';
 import { connect } from 'react-redux';
 
@@ -11,10 +11,7 @@ class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
-            user:{},
-            open: false,
-            vertical: null,
-            horizontal: null,
+            user:{}
         }
     }
     handleSubmit() {
@@ -25,26 +22,18 @@ class Login extends Component {
             userObject.username = username;
             userObject.password = pwd;
             this.props.addSubmit(userObject)
-            this.setState({
-                open:true,
-                vertical: 'top',
-                horizontal: 'right' 
-            })
+            this.props.history.push('./counterapp')            
         }else {
             alert("username or password should not be empty.")
         }
         
     }
-    handleClose = () => {
-        this.setState({ open: false });
-    };
     componentWillReceiveProps(newProps) {
        if(newProps){
            this.setState({user:newProps.user.login.user})
        }
     }
-  render() {
-    const { vertical, horizontal, open } = this.state;
+  render() {    
     return (
       <div className="login-center">
         <Grid container spacing={24}>
@@ -81,16 +70,7 @@ class Login extends Component {
                 </Paper>
             </Grid>
             <Grid item md={4} xs={3} sm={3} />
-        </Grid>
-        <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          open={this.state.open}
-          onClose={this.handleClose}
-          ContentProps={{
-            'aria-describedby': 'message-id',
-          }}
-          message={<span id="message-id">Hey!! Welcome {this.state.user.username}</span>}
-        />
+        </Grid>        
       </div>
     );
   }
@@ -107,4 +87,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Login));

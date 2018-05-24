@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import { increment, decrement, reset} from '../redux/counterReducers'
 import { connect } from 'react-redux'
@@ -9,17 +11,44 @@ class Count extends Component {
   constructor(props){
     super(props);
     this.state={
-      count:0
+      count:0,
+      user:{},
+      open: false,
+      vertical: null,
+      horizontal: null,
     }
+    this.handleOpen= this.handleOpen.bind(this)
   }
 
   componentWillReceiveProps(newProps){
-		console.log(JSON.stringify(newProps))
-		this.setState({
-			count:newProps.count
-		})
+    if(newProps.data.login.user!=""&&newProps.data.counter!=""){
+      var userData= newProps.data.login.user;
+      var countData= newProps.data.counter;
+    }  
+      this.setState({
+        count:countData,
+        user:userData,
+        open:true
+      })      
   }
-  
+  componentWillMount(){
+    if(!this.state.user.username){
+      this.props.history.push('./')
+    }
+  }
+  componentDidMount() {
+    this.handleOpen();
+  }
+  handleOpen(){
+    this.setState({
+      open:true,
+      vertical: 'top',
+      horizontal: 'right' 
+    })
+  }
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   incrementCount() {
     this.props.increment()
   }
@@ -31,8 +60,13 @@ class Count extends Component {
   }
 
   render() {
+    const { vertical, horizontal, open } = this.state;
+    if(this.state.user){
+      var username = this.state.user.username
+    }
     return (
-      <div>
+      <div style={{paddingTop:"150px"}}>
+        <h1> Sample couter app using REDUX</h1>
         <div>
           <Grid container spacing={24}>
             <Grid item md={4} xs={3} sm={3}></Grid>
@@ -50,22 +84,31 @@ class Count extends Component {
           </Grid>                
         </div>
         <div className="countPadding">
-          <h3>count: {this.state.count.counter}</h3>
+          <h3>count: {this.state.count}</h3>
         </div>
         <div className="countPadding">
         <Button size="small" variant="raised" color="secondary" onClick={this.reset.bind(this)}>
           RESET COUNT
         </Button>
         </div>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={this.state.open}
+          onClose={this.handleClose}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">Hey!!  Welcome {username}</span>}
+        />
       </div>
     )
   }
 }
 
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state)=>{  
 	return {
-		count:state
+		data:state
 	}
 }
 
@@ -75,4 +118,4 @@ const mapDispatchToProps = {
     reset
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Count);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Count));
