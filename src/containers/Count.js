@@ -12,10 +12,10 @@ class Count extends Component {
     super(props);
     this.state={
       count:0,
-      user:{},
+      user:this.props.data.login.user,
       open: false,
       vertical: null,
-      horizontal: null,
+      horizontal: null
     }
     this.handleOpen= this.handleOpen.bind(this)
   }
@@ -32,8 +32,8 @@ class Count extends Component {
       })      
   }
   componentWillMount(){
-    if(!this.state.user.username){
-      this.props.history.push('./')
+    if(!this.state.user){
+      this.props.history.push('/')
     }
   }
   componentDidMount() {
@@ -106,7 +106,7 @@ class Count extends Component {
 }
 
 
-const mapStateToProps = (state)=>{  
+const mapStateToProps = (state)=>{    
 	return {
 		data:state
 	}
