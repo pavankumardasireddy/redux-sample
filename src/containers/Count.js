@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
-import { increment, decrement, reset} from '../redux/reducers'
+import { increment, decrement, reset} from '../redux/counterReducers'
 import { connect } from 'react-redux'
 
 class Count extends Component {
@@ -32,15 +34,28 @@ class Count extends Component {
     return (
       <div>
         <div>
-          <input type="button" value="increment" onClick={this.incrementCount.bind(this)}/>
-          <input type="button" value="decrement" onClick={this.decrementCount.bind(this)}/>
+          <Grid container spacing={24}>
+            <Grid item md={4} xs={3} sm={3}></Grid>
+            <Grid item md={2} xs={3} sm={3}>
+              <Button className="" size="small" variant="raised" color="default" onClick={this.incrementCount.bind(this)}>
+                Increment
+              </Button>
+            </Grid>
+            <Grid item  md={2} xs={3} sm={3}>
+              <Button size="small" variant="raised" color="default" onClick={this.decrementCount.bind(this)}>
+                Decrement
+              </Button>
+            </Grid> 
+            <Grid item md={4} xs={3} sm={3}></Grid>
+          </Grid>                
         </div>
-        <div>
-          <span>count: </span>
-          <span>{this.state.count}</span>
+        <div className="countPadding">
+          <h3>count: {this.state.count.counter}</h3>
         </div>
-        <div>
-          <input type="button" value="RESET COUNT" onClick={this.reset.bind(this)}/>
+        <div className="countPadding">
+        <Button size="small" variant="raised" color="secondary" onClick={this.reset.bind(this)}>
+          RESET COUNT
+        </Button>
         </div>
       </div>
     )

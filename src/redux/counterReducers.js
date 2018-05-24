@@ -1,12 +1,10 @@
-import {createStore} from 'redux'
-
 // Declare types
 export const INCREMENT =  'INCREMENT'
 export const DECREMENT = 'DECREMENT'
 export const RESET = 'RESET'
 
-// Action creators 
 
+// Action creators 
 export function increment() {
     return {
         type: INCREMENT
@@ -24,7 +22,7 @@ export function reset() {
     }
 }
 //Reducers 
-var counter= function(state=0, action) {
+export default (state=0, action) => {
     switch(action.type) {
         case INCREMENT:
             return state+1;
@@ -38,7 +36,3 @@ var counter= function(state=0, action) {
             return state;
     }
 }
-
-//Store
-var store = createStore(counter)
-export default store;

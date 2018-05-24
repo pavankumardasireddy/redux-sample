@@ -1,0 +1,12 @@
+.img-login {
+    width: 100px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}  
+.login-submit {
+    padding: 10px 0 10px 0;
+} 
+.login-center {
+    padding: 135px 0 0 0;
+}
