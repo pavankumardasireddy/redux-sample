@@ -24,13 +24,13 @@ export function reset() {
 //Reducers 
 export default (state=0, action) => {
     switch(action.type) {
-        case INCREMENT:
+        case 'INCREMENT':
             return state+1;
             break;
-        case DECREMENT:
+        case 'DECREMENT':
             return state-1;
             break;
-        case RESET:
+        case 'RESET':
             return state=0;
         default: 
             return state;

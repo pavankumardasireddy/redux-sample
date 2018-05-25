@@ -34,7 +34,7 @@ class Login extends Component {
             userObject.username = username;
             userObject.password = pwd;
             if(this.state.addedUser){
-                if(userObject.username===this.state.addedUser.firstname || userObject.password=== this.state.addedUser.pswd){
+                if(userObject.username===this.state.addedUser.username || userObject.password===this.state.addedUser.pswd){
                     this.props.goLogin(userObject)
                     this.props.history.push('./counterapp') 
                 }else {
@@ -50,6 +50,11 @@ class Login extends Component {
     handleNewUser= ()=> {
         this.setState({
             showSignup:true
+        },()=>{
+            document.getElementById('fname').value="";
+            document.getElementById('uname').value="";
+            document.getElementById('email').value="";
+            document.getElementById('pwd').value="";
         })
     } 
     userSignup = () => {
@@ -61,13 +66,18 @@ class Login extends Component {
         if(!fname|| !uname|| !email || !pwd){
             alert("Plese fill all the feilds!!")
         }else {
-            signup.firstname=fname;
+            signup.fullname=fname;
             signup.username=uname;
             signup.email=email;
             signup.pswd=pwd;
             this.props.addUser(signup);
             this.setState({
                 showSignup:false
+            },()=>{
+                if(this.state.addedUser!=""){
+                    document.getElementById('username').value=this.state.addedUser.username;
+                    document.getElementById('password').value=this.state.addedUser.pswd;
+                }               
             })
         }
     }
@@ -130,7 +140,7 @@ class Login extends Component {
                                 </div>         
                             </form>    
                         ):(
-                            <form container noValidate autoComplete="off" onSubmit={this.handleNewUser.bind(this)}>
+                            <form container noValidate autoComplete="off">
                                 <div>
                                     <TextField
                                     id="username"

@@ -4,7 +4,7 @@ export const userSignup = (newuser) => ({type:SIGNUP, payload:newuser})
 
 export default (state={}, action) => {
     switch (action.type) {
-        case SIGNUP:
+        case 'SIGNUP':
             return {...state, signUP:action.payload}
             break;
         default:
