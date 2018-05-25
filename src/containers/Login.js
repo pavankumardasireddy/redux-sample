@@ -39,7 +39,7 @@ class Login extends Component {
         <Grid container spacing={24}>
             <Grid item md={4} xs={3} sm={3} />
             <Grid item md={4} xs={3} sm={3}>
-                <Paper>
+                <Paper style={{borderRadius:"5%"}}>
                     <div>
                         <img className="img-login" src="https://i.pinimg.com/originals/89/a6/bd/89a6bd634116fa8c4892fe73d76f0b19.jpg" />
                     </div>

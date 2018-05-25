@@ -71,12 +71,12 @@ class Count extends Component {
           <Grid container spacing={24}>
             <Grid item md={4} xs={3} sm={3}></Grid>
             <Grid item md={2} xs={3} sm={3}>
-              <Button className="" size="small" variant="raised" color="default" onClick={this.incrementCount.bind(this)}>
+              <Button className="" size="small" variant="raised" color="primary" onClick={this.incrementCount.bind(this)}>
                 Increment
               </Button>
             </Grid>
             <Grid item  md={2} xs={3} sm={3}>
-              <Button size="small" variant="raised" color="default" onClick={this.decrementCount.bind(this)}>
+              <Button size="small" variant="raised" color="primary" onClick={this.decrementCount.bind(this)}>
                 Decrement
               </Button>
             </Grid> 
