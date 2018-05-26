@@ -4,6 +4,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import swal from 'sweetalert';
+
 import { connect } from 'react-redux';
 
 import {submit} from '../redux/loginReducers';
@@ -36,14 +38,14 @@ class Login extends Component {
             if(this.state.addedUser){
                 if(userObject.username===this.state.addedUser.username || userObject.password===this.state.addedUser.pswd){
                     this.props.goLogin(userObject)
-                    this.props.history.push('./counterapp') 
+                    this.props.history.push('./counterapp')
                 }else {
-                    alert("username or password mismatch.")
+                    swal("username or password mismatch.");
                 }
                 
             }else { }                      
         }else {
-            alert("username or password should not be empty.")
+            swal("username or password should not be empty.")
         }
         
     }
@@ -64,7 +66,7 @@ class Login extends Component {
         var email= document.getElementById('email').value;
         var pwd= document.getElementById('pwd').value;
         if(!fname|| !uname|| !email || !pwd){
-            alert("Plese fill all the feilds!!")
+            swal("Plese fill all the feilds!!")
         }else {
             signup.fullname=fname;
             signup.username=uname;
@@ -92,8 +94,8 @@ class Login extends Component {
                         <img className="img-login" src="https://i.pinimg.com/originals/89/a6/bd/89a6bd634116fa8c4892fe73d76f0b19.jpg" />
                     </div>
                     {
-                        (this.state.showSignup)?( 
-                            <form container noValidate autoComplete="off" >   
+                        (this.state.showSignup)?(
+                            <form container noValidate autoComplete="off" >
                                 <div>
                                     <TextField
                                     id="fname"
