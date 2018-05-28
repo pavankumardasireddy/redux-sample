@@ -45,7 +45,7 @@ class Login extends Component {
                 
             }else { }                      
         }else {
-            swal("username or password should not be empty.")
+            swal("Please enter the data.")
         }
         
     }
